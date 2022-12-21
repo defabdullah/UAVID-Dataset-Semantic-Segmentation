@@ -40,22 +40,31 @@ def predict(valid_gen,model,image_size=128):
 
       label_mask = (new_label_image==id)
       label_image[label_mask] = val
+      
+    plot_graphs(real_image, label_image, predicted_image)
     
-    rate=0.998
-    masked_image = (real_image*rate + predicted_image*(1-rate))
+    
+
+
+def plot_graphs(real_image, label_image, predicted_image, rate=0.998):
 
     #plot all photos
     plt.figure(figsize=(8, 8))
+
     plt.subplot(221)
     plt.title('Testing Image')
     plt.imshow(real_image)
+    
     plt.subplot(222)
     plt.title('Testing Label')
     plt.imshow(label_image)
+    
     plt.subplot(223)
     plt.title('Prediction on test image')
     plt.imshow(predicted_image)
+
+    masked_image = (real_image*rate + predicted_image*(1-rate))
     plt.subplot(224)
-    plt.title('Mask real image with test label')
+    plt.title('Mask real image with prediction')
     plt.imshow(masked_image)
     plt.show()
