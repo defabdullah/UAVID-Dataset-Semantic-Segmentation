@@ -18,7 +18,7 @@ class DataGen(keras.utils.Sequence):
         self.on_epoch_end()
         
     def __load__(self, file_name):        
-        
+
         ## Reading Image
         image = cv2.imread(file_name, 1)
         image = cv2.resize(image, (self.image_size, self.image_size))

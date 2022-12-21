@@ -8,7 +8,9 @@ import matplotlib.pyplot as plt
 integer_class_matches = [[0, 0, 0],[128, 0, 0],[128, 64, 128],[192, 0, 192],[0, 128, 0],[128, 128, 0],[64, 64, 0],[64, 0, 128]]
 
 def predict(valid_gen,model,image_size=128):
-
+    
+    ONE_CHANNEL_IMAGE_SIZE=(image_size,image_size)
+    THREE_CHANNEL_IMAGE_SIZE = (image_size,image_size,3)
     #get random image with label
     path = random.choice(valid_gen.train_files)
     real_image, label = valid_gen.__load__(path)
@@ -19,8 +21,8 @@ def predict(valid_gen,model,image_size=128):
     pred=(model.predict(img)>0.5)[0]
 
     #convert one hot predictions to 1 channel integers
-    new_image = np.zeros((pred.shape[0],pred.shape[1]))
-    new_label_image = np.zeros((label.shape[0],label.shape[1]))
+    new_image = np.zeros(ONE_CHANNEL_IMAGE_SIZE)
+    new_label_image = np.zeros(ONE_CHANNEL_IMAGE_SIZE)
     for c in range(pred.shape[2]):
         pred_channel=pred[:,:,c]
         label_channel=label[:,:,c]
@@ -29,8 +31,8 @@ def predict(valid_gen,model,image_size=128):
         new_label_image[np.where(label_channel==1)]=c
 
     # create labeled image with colors
-    predicted_image = np.zeros((new_image.shape[0],new_image.shape[1],3),dtype=np.uint8)
-    label_image = np.zeros((label.shape[0],label.shape[1],3),dtype=np.uint8)
+    predicted_image = np.zeros(THREE_CHANNEL_IMAGE_SIZE,dtype=np.uint8)
+    label_image = np.zeros(THREE_CHANNEL_IMAGE_SIZE,dtype=np.uint8)
 
     for id,val in enumerate(integer_class_matches):
       mask = (new_image==id)
