@@ -1,5 +1,13 @@
-*.png
-
+000000.png
+000100.png
+000200.png
+000300.png
+000400.png
+000500.png
+000600.png
+000700.png
+000800.png
+000900.png
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
