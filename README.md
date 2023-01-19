@@ -1,6 +1,6 @@
 # UAVID-Dataset-Semantic-Segmentation
 
-This project aims to create a semantic segmentation model by training with the uavid dataset. The classes to be distinguished are:
+This project aims to create a semantic segmentation model by training with the [Uavid](https://uavid.nl/) dataset. The classes to be distinguished are:
 
 
 <ul>
